@@ -6,10 +6,10 @@
 #
 Name     : pypi-distlib
 Version  : 0.3.4
-Release  : 32
-URL      : https://files.pythonhosted.org/packages/85/01/88529c93e41607f1a78c1e4b346b24c74ee43d2f41cfe33ecd2e20e0c7e3/distlib-0.3.4.zip
-Source0  : https://files.pythonhosted.org/packages/85/01/88529c93e41607f1a78c1e4b346b24c74ee43d2f41cfe33ecd2e20e0c7e3/distlib-0.3.4.zip
-Source1  : https://files.pythonhosted.org/packages/85/01/88529c93e41607f1a78c1e4b346b24c74ee43d2f41cfe33ecd2e20e0c7e3/distlib-0.3.4.zip.asc
+Release  : 33
+URL      : https://bitbucket.org/pypa/distlib/downloads/distlib-0.3.4.zip
+Source0  : https://bitbucket.org/pypa/distlib/downloads/distlib-0.3.4.zip
+Source1  : https://bitbucket.org/pypa/distlib/downloads/distlib-0.3.4.zip.asc
 Summary  : Distribution utilities
 Group    : Development/Tools
 License  : HPND Python-2.0
@@ -17,9 +17,6 @@ Requires: pypi-distlib-license = %{version}-%{release}
 Requires: pypi-distlib-python = %{version}-%{release}
 Requires: pypi-distlib-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
-Provides: distlib
-Provides: distlib-python
-Provides: distlib-python3
 
 %description
 .. image:: https://img.shields.io/appveyor/build/vsajip/distlib
@@ -63,7 +60,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1641432399
+export SOURCE_DATE_EPOCH=1649737900
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
