@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x9147B477339A9B86 (vinay_sajip@yahoo.co.uk)
 #
 Name     : pypi-distlib
-Version  : 0.3.4
-Release  : 36
-URL      : https://bitbucket.org/pypa/distlib/downloads/distlib-0.3.4.zip
-Source0  : https://bitbucket.org/pypa/distlib/downloads/distlib-0.3.4.zip
-Source1  : https://bitbucket.org/pypa/distlib/downloads/distlib-0.3.4.zip.asc
+Version  : 0.3.5
+Release  : 37
+URL      : https://files.pythonhosted.org/packages/31/d5/e2aa0aa3918c8d88c4c8e4ebbc50a840e101474b98cd83d3c1712ffe5bb4/distlib-0.3.5.tar.gz
+Source0  : https://files.pythonhosted.org/packages/31/d5/e2aa0aa3918c8d88c4c8e4ebbc50a840e101474b98cd83d3c1712ffe5bb4/distlib-0.3.5.tar.gz
+Source1  : https://files.pythonhosted.org/packages/31/d5/e2aa0aa3918c8d88c4c8e4ebbc50a840e101474b98cd83d3c1712ffe5bb4/distlib-0.3.5.tar.gz.asc
 Summary  : Distribution utilities
 Group    : Development/Tools
 License  : HPND Python-2.0
@@ -17,12 +17,13 @@ Requires: pypi-distlib-license = %{version}-%{release}
 Requires: pypi-distlib-python = %{version}-%{release}
 Requires: pypi-distlib-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
+BuildRequires : pypi(setuptools)
+BuildRequires : pypi(wheel)
 
 %description
-.. image:: https://img.shields.io/appveyor/build/vsajip/distlib
-:alt: AppVeyor
-.. image:: https://coveralls.io/repos/github/vsajip/distlib/badge.svg?branch=master
-:target: https://coveralls.io/github/vsajip/distlib?branch=master
+|badge1| |badge2|
+.. |badge1| image:: https://img.shields.io/github/workflow/status/pypa/distlib/Tests
+:alt: GitHub test status
 
 %package license
 Summary: license components for the pypi-distlib package.
@@ -52,10 +53,10 @@ python3 components for the pypi-distlib package.
 
 
 %prep
-%setup -q -n distlib-0.3.4
-cd %{_builddir}/distlib-0.3.4
+%setup -q -n distlib-0.3.5
+cd %{_builddir}/distlib-0.3.5
 pushd ..
-cp -a distlib-0.3.4 buildavx2
+cp -a distlib-0.3.5 buildavx2
 popd
 
 %build
@@ -63,7 +64,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1656407873
+export SOURCE_DATE_EPOCH=1659649698
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -73,25 +74,25 @@ export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 export MAKEFLAGS=%{?_smp_mflags}
-python3 setup.py build
-
+python3 -m build --wheel --skip-dependency-check --no-isolation
 pushd ../buildavx2/
-export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
-export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 -msse2avx"
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 -msse2avx "
 export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
 export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
-python3 setup.py build
+python3 -m build --wheel --skip-dependency-check --no-isolation
 
 popd
+
 %install
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pypi-distlib
-cp %{_builddir}/distlib-0.3.4/LICENSE.txt %{buildroot}/usr/share/package-licenses/pypi-distlib/79c85e153df486fd6c05a2f7359e1ff6dc288867
-cp %{_builddir}/distlib-0.3.4/tests/test_testdist-0.1/LICENSE %{buildroot}/usr/share/package-licenses/pypi-distlib/71ff42eed070086a7e794fdab6a1c16495923820
-cp %{_builddir}/distlib-0.3.4/tests/testdist-0.1/LICENSE %{buildroot}/usr/share/package-licenses/pypi-distlib/71ff42eed070086a7e794fdab6a1c16495923820
-python3 -tt setup.py build  install --root=%{buildroot}
+cp %{_builddir}/distlib-%{version}/LICENSE.txt %{buildroot}/usr/share/package-licenses/pypi-distlib/79c85e153df486fd6c05a2f7359e1ff6dc288867
+cp %{_builddir}/distlib-%{version}/tests/test_testdist-0.1/LICENSE %{buildroot}/usr/share/package-licenses/pypi-distlib/71ff42eed070086a7e794fdab6a1c16495923820
+cp %{_builddir}/distlib-%{version}/tests/testdist-0.1/LICENSE %{buildroot}/usr/share/package-licenses/pypi-distlib/71ff42eed070086a7e794fdab6a1c16495923820
+pip install --root=%{buildroot} --no-deps --ignore-installed dist/*.whl
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
@@ -101,7 +102,7 @@ export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
 export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
-python3 -tt setup.py build install --root=%{buildroot}-v3
+pip install --root=%{buildroot}-v3 --no-deps --ignore-installed dist/*.whl
 popd
 /usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
