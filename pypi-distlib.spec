@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x9147B477339A9B86 (vinay_sajip@yahoo.co.uk)
 #
 Name     : pypi-distlib
-Version  : 0.3.5
-Release  : 40
-URL      : https://files.pythonhosted.org/packages/31/d5/e2aa0aa3918c8d88c4c8e4ebbc50a840e101474b98cd83d3c1712ffe5bb4/distlib-0.3.5.tar.gz
-Source0  : https://files.pythonhosted.org/packages/31/d5/e2aa0aa3918c8d88c4c8e4ebbc50a840e101474b98cd83d3c1712ffe5bb4/distlib-0.3.5.tar.gz
-Source1  : https://files.pythonhosted.org/packages/31/d5/e2aa0aa3918c8d88c4c8e4ebbc50a840e101474b98cd83d3c1712ffe5bb4/distlib-0.3.5.tar.gz.asc
+Version  : 0.3.6
+Release  : 41
+URL      : https://files.pythonhosted.org/packages/58/07/815476ae605bcc5f95c87a62b95e74a1bce0878bc7a3119bc2bf4178f175/distlib-0.3.6.tar.gz
+Source0  : https://files.pythonhosted.org/packages/58/07/815476ae605bcc5f95c87a62b95e74a1bce0878bc7a3119bc2bf4178f175/distlib-0.3.6.tar.gz
+Source1  : https://files.pythonhosted.org/packages/58/07/815476ae605bcc5f95c87a62b95e74a1bce0878bc7a3119bc2bf4178f175/distlib-0.3.6.tar.gz.asc
 Summary  : Distribution utilities
 Group    : Development/Tools
 License  : HPND Python-2.0
@@ -53,10 +53,10 @@ python3 components for the pypi-distlib package.
 
 
 %prep
-%setup -q -n distlib-0.3.5
-cd %{_builddir}/distlib-0.3.5
+%setup -q -n distlib-0.3.6
+cd %{_builddir}/distlib-0.3.6
 pushd ..
-cp -a distlib-0.3.5 buildavx2
+cp -a distlib-0.3.6 buildavx2
 popd
 
 %build
@@ -64,7 +64,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1659649698
+export SOURCE_DATE_EPOCH=1661532658
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -89,9 +89,9 @@ popd
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pypi-distlib
-cp %{_builddir}/distlib-%{version}/LICENSE.txt %{buildroot}/usr/share/package-licenses/pypi-distlib/79c85e153df486fd6c05a2f7359e1ff6dc288867
-cp %{_builddir}/distlib-%{version}/tests/test_testdist-0.1/LICENSE %{buildroot}/usr/share/package-licenses/pypi-distlib/71ff42eed070086a7e794fdab6a1c16495923820
-cp %{_builddir}/distlib-%{version}/tests/testdist-0.1/LICENSE %{buildroot}/usr/share/package-licenses/pypi-distlib/71ff42eed070086a7e794fdab6a1c16495923820
+cp %{_builddir}/distlib-%{version}/LICENSE.txt %{buildroot}/usr/share/package-licenses/pypi-distlib/79c85e153df486fd6c05a2f7359e1ff6dc288867 || :
+cp %{_builddir}/distlib-%{version}/tests/test_testdist-0.1/LICENSE %{buildroot}/usr/share/package-licenses/pypi-distlib/71ff42eed070086a7e794fdab6a1c16495923820 || :
+cp %{_builddir}/distlib-%{version}/tests/testdist-0.1/LICENSE %{buildroot}/usr/share/package-licenses/pypi-distlib/71ff42eed070086a7e794fdab6a1c16495923820 || :
 pip install --root=%{buildroot} --no-deps --ignore-installed dist/*.whl
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
