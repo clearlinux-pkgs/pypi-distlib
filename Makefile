@@ -1,5 +1,5 @@
 PKG_NAME := pypi-distlib
-URL = https://files.pythonhosted.org/packages/58/07/815476ae605bcc5f95c87a62b95e74a1bce0878bc7a3119bc2bf4178f175/distlib-0.3.6.tar.gz
+URL = https://files.pythonhosted.org/packages/29/34/63be59bdf57b3a8a8dcc252ef45c40f3c018777dc8843d45dd9b869868f0/distlib-0.3.7.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common
