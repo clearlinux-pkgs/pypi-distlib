@@ -5,7 +5,7 @@
 #
 Name     : pypi-distlib
 Version  : 0.3.7
-Release  : 47
+Release  : 48
 URL      : https://files.pythonhosted.org/packages/29/34/63be59bdf57b3a8a8dcc252ef45c40f3c018777dc8843d45dd9b869868f0/distlib-0.3.7.tar.gz
 Source0  : https://files.pythonhosted.org/packages/29/34/63be59bdf57b3a8a8dcc252ef45c40f3c018777dc8843d45dd9b869868f0/distlib-0.3.7.tar.gz
 Summary  : Distribution utilities
